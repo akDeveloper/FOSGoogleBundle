@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="fos_google.api" class="%fos_google.api.class%">
+            <argument type="collection">
+                <argument key="app_name">%fos_google.app_name%</argument>
+                <argument key="client_id">%fos_google.client_id%</argument>
+                <argument key="client_secret">%fos_google.client_secret%</argument>
+                <argument key="state">%fos_google.state%</argument>
+                <argument key="access_type">%fos_google.access_type%</argument>
+                <argument key="scopes">%fos_google.scopes%</argument>
+                <argument key="approval_prompt">%fos_google.approval_prompt%</argument>
+                <argument key="redirect_uri">%fos_google.redirect_uri%</argument>
+            </argument>
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="fos_google.helper" class="%fos_google.helper.class%">
+            <argument type="service" id="templating" />
+            <argument type="service" id="fos_google.api" />
+            <tag name="templating.helper" alias="google" />
+        </service>
+
+        <service id="fos_google.twig" class="%fos_google.twig.class%">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+</container>

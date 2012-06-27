@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="fos_google.auth" class="FOS\GoogleBundle\Security\Authentication\Provider\GoogleProvider" public="false">
+            <argument /> <!-- Provider-shared Key -->
+            <argument type="service" id="fos_google.api" />
+        </service>
+
+        <service id="fos_google.logout_handler" class="FOS\GoogleBundle\Security\Logout\GoogleHandler" public="false">
+            <argument type="service" id="fos_google.api" />
+        </service>
+
+        <service id="fos_google.security.authentication.listener"
+                 class="FOS\GoogleBundle\Security\Firewall\GoogleListener"
+                 parent="security.authentication.listener.abstract"
+                 abstract="true">
+        </service>
+
+        <service  id="fos_google.security.authentication.entry_point" 
+                  class="FOS\GoogleBundle\Security\EntryPoint\GoogleAuthenticationEntryPoint" 
+                  public="false" 
+                  abstract="true">
+            <argument type="service" id="fos_google.api" />
+        </service>
+    </services>
+</container>
