@@ -3,23 +3,20 @@
     "type": "symfony-bundle",
     "description": "Integrate the Google Platform into your Symfony2 application.",
     "keywords": ["google"],
-    "homepage": "http://friendsofsymfony.github.com",
+    "homepage": "http://bitgandtter.github.com",
     "license": "MIT",
     "authors": [
         {
             "name":"Yasmany Cubela Medina",
             "email":"yasmanycm@gmail.com"
-        },
-        {
-            "name": "FriendsOfSymfony Community",
-            "homepage": "https://github.com/friendsofsymfony/FOSFacebookBundle/contributors"
         }
     ],
 
     "require": {
         "php": ">=5.3.2",
-        "symfony/symfony": "2.0.*",
-        "google/php-sdk": "dev-master"
+        "symfony/framework-bundle": "2.1.*",
+        "symfony/security-bundle": "2.1.*",
+        "symfony/twig-bundle": "2.1.*"
     },
 
     "autoload": {
