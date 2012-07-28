@@ -1,5 +1,5 @@
 {
-    "name": "friendsofsymfony/google-bundle",
+    "name": "bitgandtter/google-bundle",
     "type": "symfony-bundle",
     "description": "Integrate the Google Platform into your Symfony2 application.",
     "keywords": ["google"],
