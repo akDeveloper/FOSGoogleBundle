@@ -28,8 +28,8 @@ Installation
         Add the following lines in your ``deps`` file::
 
             [FOSGoogleBundle]
-	      git=git://github.com/bitgandtter/FOSGoogleBundle.git
-	      target=/bundles/FOS/GoogleBundle
+      	      git=git://github.com/bitgandtter/FOSGoogleBundle.git
+      	      target=/bundles/FOS/GoogleBundle
 
         Run the vendors script:
 
@@ -75,14 +75,14 @@ Installation
 
           # application/config/config.yml
           fos_google:
-	    app_name: appName
-	    client_id: 123456789
-	    client_secret: s3cr3t
-	    state: auth
-	    access_type: online
-	    scopes: [userinfo.email, userinfo.profile]
-	    approval_prompt: auto
-	    redirect_uri: http://tu-sitio.com/login_check
+      	    app_name: appName
+      	    client_id: 123456789
+      	    client_secret: s3cr3t
+      	    state: auth
+      	    access_type: online
+      	    scopes: [userinfo.email, userinfo.profile]
+      	    approval_prompt: auto
+      	    redirect_uri: http://tu-sitio.com/login_check
 
   6. Add this configuration if you want to use the `security component`:
 
@@ -96,7 +96,7 @@ Installation
                       # since anonymous is allowed users will not be forced to login
                       pattern:   ^/.*
 		      fos_google:
-			  provider: google
+			        provider: google
 
               access_control:
                   - { path: ^/secured/.*, role: [IS_AUTHENTICATED_FULLY] } # This is the route secured with fos_google
@@ -117,14 +117,14 @@ Installation
 
               providers:
                   # choose the provider name freely
-		  google:
-		      id: google.user # see "Example Customer User Provider using the FOS\UserBundle" chapter further down
+		              google:
+		                id: google.user # see "Example Customer User Provider using the FOS\UserBundle" chapter further down
 
               firewalls:
                   public:
                       pattern:   ^/.*
                       fos_google:
-			  provider: google
+			            provider: google
                       anonymous: true
                       logout: true 
 
@@ -236,41 +236,41 @@ to the provider id in the "provider" section in the config.yml:
 	    {
 	      if ( empty( $user ) )
 	      {
-		$user = $this->userManager->createUser( );
-		$user->setEnabled( true );
-		$user->setPassword( '' );
-		$user->setSalt( '' );
+      		$user = $this->userManager->createUser( );
+      		$user->setEnabled( true );
+      		$user->setPassword( '' );
+      		$user->setSalt( '' );
 	      }
 
 	      if ( isset( $gData['id'] ) )
 	      {
-		$user->setGoogleID( $gData['id'] );
+		      $user->setGoogleID( $gData['id'] );
 	      }
 	      if ( isset( $gData['name'] ) )
 	      {
-		$nameAndLastNames = explode( " ", $gData['name'] );
-		if ( count( $nameAndLastNames ) > 1 )
-		{
-		  $user->setFirstname( $nameAndLastNames[0] );
-		  $user->setLastname( $nameAndLastNames[1] );
-		  $user->setLastname2( ( count( $nameAndLastNames ) > 2 ) ? $nameAndLastNames[2] : "" );
-		}
-		else
-		{
-		  $user->setFirstname( $nameAndLastNames[0] );
-		  $user->setLastname( "" );
-		  $user->setLastname2( "" );
-		}
+      		$nameAndLastNames = explode( " ", $gData['name'] );
+      		if ( count( $nameAndLastNames ) > 1 )
+      		{
+      		  $user->setFirstname( $nameAndLastNames[0] );
+      		  $user->setLastname( $nameAndLastNames[1] );
+      		  $user->setLastname2( ( count( $nameAndLastNames ) > 2 ) ? $nameAndLastNames[2] : "" );
+      		}
+      		else
+      		{
+      		  $user->setFirstname( $nameAndLastNames[0] );
+      		  $user->setLastname( "" );
+      		  $user->setLastname2( "" );
+      		}
 	      }
 	      if ( isset( $gData['email'] ) )
 	      {
-		$user->setEmail( $gData['email'] );
-		$user->setUsername( $gData['email'] );
+      		$user->setEmail( $gData['email'] );
+      		$user->setUsername( $gData['email'] );
 	      }
 	      else
 	      {
-		$user->setEmail( $gData['id'] . "@google.com" );
-		$user->setUsername( $gData['id'] . "@google.com" );
+      		$user->setEmail( $gData['id'] . "@google.com" );
+      		$user->setUsername( $gData['id'] . "@google.com" );
 	      }
 
 	      if ( count( $this->validator->validate( $user, 'Google' ) ) )
