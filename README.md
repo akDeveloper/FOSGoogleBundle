@@ -13,7 +13,6 @@ Note that logging in a user requires multiple steps:
 
   1. the user must be logged into Google
   2. the user must connect his Google account to your site
-  3. once the user has done 1. and 2. you must trigger the login
 
 Please also refer to the official documentation of the SecurityBundle, especially
 for details on the configuration:
