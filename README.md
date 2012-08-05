@@ -18,6 +18,9 @@ Please also refer to the official documentation of the SecurityBundle, especiall
 for details on the configuration:
 http://symfony.com/doc/2.0/book/security/authentication.html
 
+NOTE:
+  To use in SF 2.0.x Use Tag 0.1
+
 Installation
 ============
 
