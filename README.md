@@ -37,6 +37,7 @@ Installation
       ``` bash
           $ php composer.phar update friendsofsymfony/facebook-bundle
 
+
   3. Add this bundle to your application's kernel:
 
           // app/ApplicationKernel.php
