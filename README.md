@@ -33,7 +33,8 @@ Installation
             }
 
   2. Run the composer to download the bundle
-      $ php composer.phar update friendsofsymfony/facebook-bundle
+            
+            $ php composer.phar update friendsofsymfony/facebook-bundle
           
   
   3. Add this bundle to your application's kernel:
