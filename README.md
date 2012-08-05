@@ -26,25 +26,16 @@ Installation
 
         Add the following lines in your ``deps`` file::
 
-            [FOSGoogleBundle]
-      	      git=git://github.com/bitgandtter/FOSGoogleBundle.git
-      	      target=/bundles/FOS/GoogleBundle
+            {
+            "require": {
+                "friendsofsymfony/facebook-bundle": "dev-master"
+            }
+            }
 
-        Run the vendors script:
-
-            ./bin/vendors install
-
-      * Using git submodules.
-
-            $ git submodule add git://github.com/bitgandtter/FOSGoogleBundle.git vendor/bundles/FOS/GoogleBundle
-
-  2. Add the FOS namespace to your autoloader:
-
-          // app/autoload.php
-          $loader->registerNamespaces(array(
-                'FOS' => __DIR__.'/../vendor/bundles',
-                // your other namespaces
-          ));
+  2. Run the composer to download the bundle
+  
+      ``` bash
+          $ php composer.phar update friendsofsymfony/facebook-bundle
 
   3. Add this bundle to your application's kernel:
 

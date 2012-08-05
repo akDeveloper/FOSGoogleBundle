@@ -2,7 +2,7 @@
 
 namespace FOS\GoogleBundle\Google;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 require_once 'google-api/apiClient.php';
 require_once 'google-api/contrib/apiOauth2Service.php';
