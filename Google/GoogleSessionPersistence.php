@@ -2,12 +2,14 @@
 
 namespace FOS\GoogleBundle\Google;
 use Symfony\Component\HttpFoundation\Session\Session;
+use GoogleApi\Client;
+use GoogleApi\Service\Service;
 
 /**
  * Implements Symfony2 session persistence for Google.
  *
  */
-class GoogleSessionPersistence extends \apiClient
+class GoogleSessionPersistence extends Client
 {
   const PREFIX = '_fos_google_';
 
@@ -33,7 +35,7 @@ class GoogleSessionPersistence extends \apiClient
     $this->setState( $config["state"] );
     $this->setAccessType( $config["access_type"] );
     $this->setApprovalPrompt( $config["approval_prompt"] );
-    $this->oauth = new \apiOauth2Service( $this);
+    $this->oauth = new Service( $this);
 
     $this->session = $session;
     $this->prefix = $prefix;
