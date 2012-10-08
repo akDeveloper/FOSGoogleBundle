@@ -3,7 +3,7 @@
 namespace FOS\GoogleBundle\Google;
 use Symfony\Component\HttpFoundation\Session\Session;
 use GoogleApi\Client;
-use GoogleApi\Service\Service;
+use GoogleApi\Contrib\apiOauth2Service as Service;
 
 /**
  * Implements Symfony2 session persistence for Google.
