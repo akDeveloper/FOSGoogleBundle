@@ -17,7 +17,7 @@
         "symfony/framework-bundle": "2.1.*",
         "symfony/security-bundle": "2.1.*",
         "symfony/twig-bundle": "2.1.*",
-        "bitgandtter/google-api-php-client": "dev-master"
+        "sorien/google-api": "dev-master"
     },
 
     "autoload": {
