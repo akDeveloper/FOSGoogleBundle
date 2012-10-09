@@ -223,10 +223,12 @@ to the provider id in the "provider" section in the config.yml:
 	      $gData = null;
 	    }
 
-	    $user = $this->findUserByGIdOrEmail( $username, isset( $gData['email'] ) ? $gData['email'] : null );
-
 	    if ( !empty( $gData ) )
 	    {
+
+	      $email = $gData->getEmail(  );
+	      $user = $this->findUserByGIdOrEmail( $username, isset( $email ) ? $email : null );
+
 	      if ( empty( $user ) )
 	      {
       		$user = $this->userManager->createUser( );
@@ -235,13 +237,18 @@ to the provider id in the "provider" section in the config.yml:
       		$user->setSalt( '' );
 	      }
 
-	      if ( isset( $gData['id'] ) )
+	      $id = $gData->getId();
+
+	      if ( isset( $id ) )
 	      {
-		      $user->setGoogleID( $gData['id'] );
+		      $user->setGoogleID( $id );
 	      }
-	      if ( isset( $gData['name'] ) )
+
+	      $name = $gData->getName();
+
+	      if ( isset( $name ) )
 	      {
-      		$nameAndLastNames = explode( " ", $gData['name'] );
+      		$nameAndLastNames = explode( " ", $name );
       		if ( count( $nameAndLastNames ) > 1 )
       		{
       		  $user->setFirstname( $nameAndLastNames[0] );
@@ -255,15 +262,16 @@ to the provider id in the "provider" section in the config.yml:
       		  $user->setLastname2( "" );
       		}
 	      }
-	      if ( isset( $gData['email'] ) )
+
+	      if ( isset( $email ) )
 	      {
-      		$user->setEmail( $gData['email'] );
-      		$user->setUsername( $gData['email'] );
+      		$user->setEmail( $email );
+      		$user->setUsername( $email );
 	      }
 	      else
 	      {
-      		$user->setEmail( $gData['id'] . "@google.com" );
-      		$user->setUsername( $gData['id'] . "@google.com" );
+      		$user->setEmail( $id . "@google.com" );
+      		$user->setUsername( $id . "@google.com" );
 	      }
 
 	      if ( count( $this->validator->validate( $user, 'Google' ) ) )
