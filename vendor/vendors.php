@@ -9,28 +9,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-set_time_limit(0);
+set_time_limit( 0 );
 
-if (isset($argv[1])) {
-    $_SERVER['SYMFONY_VERSION'] = $argv[1];
+if ( isset( $argv[1] ) )
+{
+  $_SERVER['SYMFONY_VERSION'] = $argv[1];
 }
 
 $vendorDir = __DIR__;
-$deps = array(
-    array('symfony', 'http://github.com/symfony/symfony', isset($_SERVER['SYMFONY_VERSION']) ? $_SERVER['SYMFONY_VERSION'] : 'origin/master'),
-    array('google', 'git://github.com/google/php-sdk.git', 'origin/master'),
-    array('twig', 'http://github.com/fabpot/Twig', 'origin/master'),
-);
+$deps = array( array( 'symfony', 'http://github.com/symfony/symfony', isset( $_SERVER['SYMFONY_VERSION'] ) ? $_SERVER['SYMFONY_VERSION'] : 'origin/master' ),
+    array( 'google', 'git://github.com/google/php-sdk.git', 'origin/master' ), array( 'twig', 'http://github.com/fabpot/Twig', 'origin/master' ), );
 
-foreach ($deps as $dep) {
-    list($name, $url, $rev) = $dep;
+foreach ( $deps as $dep )
+{
+  list($name, $url, $rev) = $dep;
 
-    echo "> Installing/Updating $name\n";
+  echo "> Installing/Updating $name\n";
 
-    $installDir = $vendorDir.'/'.$name;
-    if (!is_dir($installDir)) {
-        system(sprintf('git clone -q %s %s', escapeshellarg($url), escapeshellarg($installDir)));
-    }
+  $installDir = $vendorDir . '/' . $name;
+  if ( !is_dir( $installDir ) )
+  {
+    system( sprintf( 'git clone -q %s %s', escapeshellarg( $url ), escapeshellarg( $installDir ) ) );
+  }
 
-    system(sprintf('cd %s && git fetch -q origin && git reset --hard %s', escapeshellarg($installDir), escapeshellarg($rev)));
+  system( sprintf( 'cd %s && git fetch -q origin && git reset --hard %s', escapeshellarg( $installDir ), escapeshellarg( $rev ) ) );
 }

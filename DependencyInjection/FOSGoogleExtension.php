@@ -10,7 +10,6 @@
  */
 
 namespace FOS\GoogleBundle\DependencyInjection;
-
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -19,57 +18,61 @@ use Symfony\Component\Config\FileLocator;
 
 class FOSGoogleExtension extends Extension
 {
-    protected $resources = array(
-        'google' => 'google.xml',
-        'security' => 'security.xml'
-    );
+  protected $resources = array( 'google' => 'google.xml', 'security' => 'security.xml' );
 
-    public function load(array $configs, ContainerBuilder $container)
+  public function load( array $configs, ContainerBuilder $container )
+  {
+    $processor = new Processor( );
+    $configuration = new Configuration( );
+    $config = $processor->processConfiguration( $configuration, $configs );
+
+    $this->loadDefaults( $container );
+
+    if ( isset( $config['alias'] ) )
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
-        $config = $processor->processConfiguration($configuration, $configs);
-
-        $this->loadDefaults($container);
-
-        if (isset($config['alias'])) {
-            $container->setAlias($config['alias'], 'fos_google.api');
-        }
-
-        foreach (array('api', 'helper', 'twig') as $attribute) {
-            $container->setParameter('fos_google.'.$attribute.'.class', $config['class'][$attribute]);
-        }
-
-        foreach (array('app_name', 'client_id', 'client_secret', 'redirect_uri', 'state', 'access_type', 'approval_prompt', 'scopes') as $attribute) {
-            $container->setParameter('fos_google.'.$attribute, $config[$attribute]);
-        }
+      $container->setAlias( $config['alias'], 'fos_google.api' );
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getXsdValidationBasePath()
+    foreach ( array( 'api', 'helper', 'twig' ) as $attribute )
     {
-        return __DIR__ . '/../Resources/config/schema';
+      $container->setParameter( 'fos_google.' . $attribute . '.class', $config['class'][$attribute] );
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getNamespace()
+    foreach ( array( 'app_name', 'client_id', 'client_secret', 'redirect_uri', 'state', 'access_type', 'approval_prompt', 'scopes' ) as $attribute )
     {
-        return 'http://symfony.com/schema/dic/fos_google';
+      $container->setParameter( 'fos_google.' . $attribute, $config[$attribute] );
     }
+  }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    protected function loadDefaults($container)
+  /**
+   * @codeCoverageIgnore
+   */
+
+  public function getXsdValidationBasePath( )
+  {
+    return __DIR__ . '/../Resources/config/schema';
+  }
+
+  /**
+   * @codeCoverageIgnore
+   */
+
+  public function getNamespace( )
+  {
+    return 'http://symfony.com/schema/dic/fos_google';
+  }
+
+  /**
+   * @codeCoverageIgnore
+   */
+
+  protected function loadDefaults( $container )
+  {
+    $loader = new XmlFileLoader( $container, new FileLocator( __DIR__ . '/../Resources/config'));
+
+    foreach ( $this->resources as $resource )
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        foreach ($this->resources as $resource) {
-            $loader->load($resource);
-        }
+      $loader->load( $resource );
     }
+  }
 }

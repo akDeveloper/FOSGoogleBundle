@@ -10,7 +10,6 @@
  */
 
 namespace FOS\GoogleBundle\Security\EntryPoint;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
@@ -22,18 +21,19 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class GoogleAuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
-    protected $googleApi;
+  protected $googleApi;
 
-    public function __construct(\apiClient $googleApi)
-    {
-        $this->googleApi = $googleApi;
-    }
+  public function __construct( \apiClient $googleApi )
+  {
+    $this->googleApi = $googleApi;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function start(Request $request, AuthenticationException $authException = null)
-    {
-        return new RedirectResponse($this->googleApi->createAuthUrl());
-    }
+  /**
+   * {@inheritdoc}
+   */
+
+  public function start( Request $request, AuthenticationException $authException = null )
+  {
+    return new RedirectResponse( $this->googleApi->createAuthUrl( ));
+  }
 }

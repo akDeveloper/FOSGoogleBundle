@@ -10,14 +10,13 @@
  */
 
 namespace FOS\GoogleBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SecurityController extends Controller
 {
-    public function loginAction()
-    {
-      $googleApi = $this->get("fos_google.api");
-      return $this->redirect($googleApi->createAuthUrl());
-    }
+
+  public function loginAction( )
+  {
+    return $this->redirect( $this->get( "fos_google.api" )->createAuthUrl( ) );
+  }
 }

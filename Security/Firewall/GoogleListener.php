@@ -10,7 +10,6 @@
  */
 
 namespace FOS\GoogleBundle\Security\Firewall;
-
 use FOS\GoogleBundle\Security\Authentication\Token\GoogleUserToken;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class GoogleListener extends AbstractAuthenticationListener
 {
-    protected function attemptAuthentication(Request $request)
-    {
-      if($request->get("code", null))
-        return $this->authenticationManager->authenticate(new GoogleUserToken($this->providerKey));
-      return null;
-    }
+
+  protected function attemptAuthentication( Request $request )
+  {
+    if ( $request->get( "code", null ) )
+      return $this->authenticationManager->authenticate( new GoogleUserToken( $this->providerKey) );
+    return null;
+  }
 }
