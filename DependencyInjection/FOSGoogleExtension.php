@@ -29,19 +29,13 @@ class FOSGoogleExtension extends Extension
     $this->loadDefaults( $container );
 
     if ( isset( $config['alias'] ) )
-    {
       $container->setAlias( $config['alias'], 'fos_google.api' );
-    }
 
     foreach ( array( 'api', 'helper', 'twig' ) as $attribute )
-    {
       $container->setParameter( 'fos_google.' . $attribute . '.class', $config['class'][$attribute] );
-    }
 
-    foreach ( array( 'app_name', 'client_id', 'client_secret', 'redirect_uri', 'state', 'access_type', 'approval_prompt', 'scopes' ) as $attribute )
-    {
+    foreach ( array( 'app_name', 'client_id', 'client_secret', 'state', 'access_type', 'approval_prompt', 'scopes', 'callback_route' ) as $attribute )
       $container->setParameter( 'fos_google.' . $attribute, $config[$attribute] );
-    }
   }
 
   /**

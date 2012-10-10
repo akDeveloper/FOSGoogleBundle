@@ -1,6 +1,7 @@
 <?php
 
 namespace FOS\GoogleBundle\Google;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Session\Session;
 use GoogleApi\Client;
 use GoogleApi\Contrib\apiOauth2Service as Service;
@@ -18,14 +19,14 @@ class GoogleSessionPersistence extends Client
   private $prefix;
   protected static $kSupportedKeys = array( 'state', 'code', 'access_token', 'user_id' );
 
-  public function __construct( $config, Session $session, $prefix = self::PREFIX )
+  public function __construct( $config, Session $session, Container $container, $prefix = self::PREFIX )
   {
     parent::__construct( $config );
 
     $this->setApplicationName( $config["app_name"] );
     $this->setClientId( $config["client_id"] );
     $this->setClientSecret( $config["client_secret"] );
-    $this->setRedirectUri( $config["redirect_uri"] );
+    $this->setRedirectUri( $container->get( 'request' )->getUriForPath( '' ) . $container->get( 'router' )->generate( $config["callback_route"] ) );
 
     $scopes = array( );
     foreach ( $config["scopes"] as $scope )

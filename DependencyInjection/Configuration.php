@@ -33,12 +33,21 @@ class Configuration implements ConfigurationInterface
     $treeBuilder = new TreeBuilder( );
     $rootNode = $treeBuilder->root( 'fos_google' );
 
-    $rootNode->fixXmlConfig( 'permission', 'permissions' )->children( )->scalarNode( 'app_name' )->isRequired( )->cannotBeEmpty( )->end( )->scalarNode( 'client_id' )->isRequired( )->cannotBeEmpty( )
-        ->end( )->scalarNode( 'client_secret' )->isRequired( )->cannotBeEmpty( )->end( )->scalarNode( 'redirect_uri' )->isRequired( )->cannotBeEmpty( )->end( )->arrayNode( 'scopes' )
-        ->prototype( 'scalar' )->isRequired( )->end( )->end( )->scalarNode( 'state' )->defaultValue( 'auth' )->end( )->scalarNode( 'access_type' )->defaultValue( 'online' )->end( )
-        ->scalarNode( 'approval_prompt' )->defaultValue( 'auto' )->end( )->arrayNode( 'class' )->addDefaultsIfNotSet( )->children( )->scalarNode( 'api' )
-        ->defaultValue( 'FOS\GoogleBundle\Google\GoogleSessionPersistence' )->end( )->scalarNode( 'helper' )->defaultValue( 'FOS\GoogleBundle\Templating\Helper\GoogleHelper' )->end( )
-        ->scalarNode( 'twig' )->defaultValue( 'FOS\GoogleBundle\Twig\Extension\GoogleExtension' )->end( )->end( )->end( )->end( );
+    $rootNode->fixXmlConfig( 'permission', 'permissions' )->children( )// childrens
+        ->scalarNode( 'app_name' )->isRequired( )->cannotBeEmpty( )->end( ) // app name
+        ->scalarNode( 'client_id' )->isRequired( )->cannotBeEmpty( )->end( ) // client id
+        ->scalarNode( 'client_secret' )->isRequired( )->cannotBeEmpty( )->end( ) // client secret
+        ->scalarNode( 'callback_route' )->isRequired( )->cannotBeEmpty( )->end( ) // redirect callback
+        ->arrayNode( 'scopes' )->prototype( 'scalar' )->isRequired( )->end( )->end( ) // scopes
+        ->scalarNode( 'state' )->defaultValue( 'auth' )->end( ) // default state auth
+        ->scalarNode( 'access_type' )->defaultValue( 'online' )->end( ) // default acess type online
+        ->scalarNode( 'approval_prompt' )->defaultValue( 'auto' )->end( ) // 
+        ->arrayNode( 'class' )->addDefaultsIfNotSet( )->children( ) // clasess
+        ->scalarNode( 'api' )->defaultValue( 'FOS\GoogleBundle\Google\GoogleSessionPersistence' )->end( ) // api
+        ->scalarNode( 'helper' )->defaultValue( 'FOS\GoogleBundle\Templating\Helper\GoogleHelper' )->end( ) // template helper
+        ->scalarNode( 'twig' )->defaultValue( 'FOS\GoogleBundle\Twig\Extension\GoogleExtension' )->end( ) // twig ext
+        ->end( ) // end clasess
+        ->end( )->end( );
 
     return $treeBuilder;
   }
