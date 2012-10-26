@@ -19,14 +19,14 @@ class GoogleSessionPersistence extends Client
   private $prefix;
   protected static $kSupportedKeys = array( 'state', 'code', 'access_token', 'user_id' );
 
-  public function __construct( $config, Session $session, Container $container, $prefix = self::PREFIX )
+  public function __construct( $config, Session $session, $prefix = self::PREFIX )
   {
     parent::__construct( $config );
 
     $this->setApplicationName( $config["app_name"] );
     $this->setClientId( $config["client_id"] );
     $this->setClientSecret( $config["client_secret"] );
-    $this->setRedirectUri( $container->get( 'request' )->getUriForPath( '' ) . $container->get( 'router' )->generate( $config["callback_route"] ) );
+    $this->setRedirectUri( $config["callback_url"] );
 
     $scopes = array( );
     foreach ( $config["scopes"] as $scope )

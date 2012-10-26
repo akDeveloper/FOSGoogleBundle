@@ -36,8 +36,9 @@ class Configuration implements ConfigurationInterface
     $rootNode->fixXmlConfig( 'permission', 'permissions' )->children( )// childrens
         ->scalarNode( 'app_name' )->isRequired( )->cannotBeEmpty( )->end( ) // app name
         ->scalarNode( 'client_id' )->isRequired( )->cannotBeEmpty( )->end( ) // client id
-        ->scalarNode( 'client_secret' )->isRequired( )->cannotBeEmpty( )->end( ) // client secret
-        ->scalarNode( 'callback_route' )->isRequired( )->cannotBeEmpty( )->end( ) // redirect callback
+        ->scalarNode( 'client_secret' )->cannotBeEmpty( )->end( ) // client secret
+        ->scalarNode( 'callback_route' )->cannotBeEmpty( )->end( ) // redirect callback
+        ->scalarNode( 'callback_url' )->isRequired( )->cannotBeEmpty( )->end( ) // redirect callback
         ->arrayNode( 'scopes' )->prototype( 'scalar' )->isRequired( )->end( )->end( ) // scopes
         ->scalarNode( 'state' )->defaultValue( 'auth' )->end( ) // default state auth
         ->scalarNode( 'access_type' )->defaultValue( 'online' )->end( ) // default acess type online

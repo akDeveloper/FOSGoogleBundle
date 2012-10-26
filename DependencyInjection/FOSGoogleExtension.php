@@ -34,8 +34,13 @@ class FOSGoogleExtension extends Extension
     foreach ( array( 'api', 'helper', 'twig' ) as $attribute )
       $container->setParameter( 'fos_google.' . $attribute . '.class', $config['class'][$attribute] );
 
-    foreach ( array( 'app_name', 'client_id', 'client_secret', 'state', 'access_type', 'approval_prompt', 'scopes', 'callback_route' ) as $attribute )
+    foreach ( array( 'app_name', 'client_id', 'client_secret', 'state', 'access_type', 'approval_prompt', 'scopes' ) as $attribute )
       $container->setParameter( 'fos_google.' . $attribute, $config[$attribute] );
+
+    /* if ( array_key_exists( 'callback_route', $config ) )
+      $container->setParameter( 'fos_google.' . $attribute, $config['callback_route'] );
+    else */
+    $container->setParameter( 'fos_google.callback_url', $config['callback_url'] );
   }
 
   /**

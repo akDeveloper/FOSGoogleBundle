@@ -75,7 +75,7 @@ Installation
       	    access_type: online
       	    scopes: [userinfo.email, userinfo.profile]
       	    approval_prompt: auto
-      	    callback_route: _security_check
+      	    callback_url: http://yourdomain.com/login_check
 
   6. Add this configuration if you want to use the `security component`:
 
