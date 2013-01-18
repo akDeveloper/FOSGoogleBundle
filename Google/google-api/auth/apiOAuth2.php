@@ -105,10 +105,11 @@ class apiOAuth2 extends apiAuth {
         }
         throw new apiAuthException("Error fetching OAuth2 access token, message: '$response'", $request->getResponseHttpCode());
       }
+      
+      $authUrl = $this->createAuthUrl($service['scope']);
+      header('Location: ' . $authUrl);
+      exit(0);
     }
-
-    $authUrl = $this->createAuthUrl($service['scope']);
-    header('Location: ' . $authUrl);
   } 
 
   /**
