@@ -95,6 +95,7 @@ class apiOAuth2 extends apiAuth {
       if ($request->getResponseHttpCode() == 200) {
         $this->setAccessToken($request->getResponseBody());
         $this->accessToken['created'] = time();
+        $_SESSION['access_token'] = $request->getResponseBody();
         return $this->getAccessToken();
       } else {
         $response = $request->getResponseBody();
@@ -139,6 +140,7 @@ class apiOAuth2 extends apiAuth {
    * @throws apiAuthException Thrown when $accessToken is invalid.
    */
   public function setAccessToken($accessToken) {
+    $accessToken = $accessToken ?: $_SESSION['access_token'];
     $accessToken = json_decode($accessToken, true);
     if ($accessToken == null) {
       throw new apiAuthException('Could not json decode the access token');
